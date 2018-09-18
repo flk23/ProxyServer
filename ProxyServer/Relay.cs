@@ -48,9 +48,9 @@ namespace ProxyServer
                         var document = new HtmlDocument();
                         document.LoadHtml(html);
 
-                        var regex = new Regex(@"\b(\w|[а-яА-ЯёЁ-]){6}\b");
+                        var regex = new Regex(@"(?<!-)\b[\wа-яА-ЯёЁ]{1}[\wа-яА-ЯёЁ-]{4}[\wа-яА-ЯёЁ]{1}\b(?!-)");
 
-                        foreach (var node in document.DocumentNode.SelectNodes("//*[not(script) and not(style)]"))
+                        foreach (var node in document.DocumentNode.SelectNodes("//*[not(self::script) and not(self::style)]"))
                         {
                             foreach (var child in node.ChildNodes)
                             {
